@@ -33,4 +33,4 @@ jobs:
             .blob.core.windows.net
             victoria-logs-cluster.prod.rapportlabs.dance
           mode: agent
-          direct_prompt: ./claude/victoria-logs.collector.md
+          direct_prompt: ./claude/agents/victoria-logs.collector.md
