@@ -1,4 +1,4 @@
-name: Log Analysis Pipeline with Claude Code
+name: TEST 
 
 on:
   schedule:
