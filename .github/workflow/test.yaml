@@ -3,7 +3,9 @@ name: TEST
 on:
   schedule:
     - cron: '0 * * * *'  # 매시간 정각 실행
-  workflow_dispatch:      # 수동 실행 가능
+  workflow_dispatch:
+    branches:
+	- main      # 수동 실행 가능
 
 jobs:
   log-pipeline:
