@@ -1,0 +1,37 @@
+name: Log Analysis Pipeline with Claude Code
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 매시간 정각 실행
+  workflow_dispatch:      # 수동 실행 가능
+
+jobs:
+  log-pipeline:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Collect Logs And Create Issue With Claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          timeout_minutes: "60"
+          experimental_allowed_domains: |
+            .anthropic.com
+            .github.com
+            api.github.com
+            .githubusercontent.com
+            bun.sh
+            registry.npmjs.org
+            .blob.core.windows.net
+            victoria-logs-cluster.prod.rapportlabs.dance
+          mode: agent
+          direct_prompt: ./claude/agents/victoria-logs-collector.md
+
